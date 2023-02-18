@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\UploadedFile;
@@ -125,5 +126,12 @@ class Article extends \yii\db\ActiveRecord
     public function clearCurrentTags(){
         ArticleTag::deleteAll(['article_id'=>$this->id]);
     }
+
+    public function getDate(){
+        //Yii::$app->formatter->locale = 'ru-RU';
+        return Yii::$app->formatter->asDate($this->date);
+    }
+
+
 
 }

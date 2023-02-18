@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\Category;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -77,9 +78,16 @@ class SiteController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+        $popularArticles = Article::find()->orderBy('viewed desc')->limit(3)->all(); //сортировка по популярности статьи для вывода
+        $sortByDate = Article::find()->orderBy('date asc')->limit(4)->all(); //сортировка по дате. выводит новые статьи
+        $categories = Category::find()->all(); //просто выводит все категории
+
         return $this->render('index', [
             'articles' => $articles,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'popularArticles' => $popularArticles,
+            'sortByDate' => $sortByDate,
+            'categories' => $categories
         ]);
     }
 
