@@ -71,7 +71,7 @@ class SiteController extends Controller
         $count = $query->count();
 
 // create a pagination object with the total count
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>1]);
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>3]);
 
 // limit the query using the pagination and retrieve the articles
         $articles = $query->offset($pagination->offset)
@@ -79,7 +79,7 @@ class SiteController extends Controller
             ->all();
 
         $popularArticles = Article::find()->orderBy('viewed desc')->limit(3)->all(); //сортировка по популярности статьи для вывода
-        $sortByDate = Article::find()->orderBy('date asc')->limit(4)->all(); //сортировка по дате. выводит новые статьи
+        $sortByDate = Article::find()->orderBy('date asc')->limit(4)->all(); //сортировка по дате
         $categories = Category::find()->all(); //просто выводит все категории
 
         return $this->render('index', [
@@ -91,39 +91,11 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+    public function actionView($id){
+        $article = Article::findOne($id);
+        return$this->render('singlePost', ['article'=>$article,]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 
     /**
      * Displays contact page.
@@ -156,7 +128,23 @@ class SiteController extends Controller
         return $this->render('singlePost');
     }
 
-    public function actionCategory(){
-        return $this->render('category');
+    public function actionCategory($id){
+        // build a DB query to get all articles with status = 1
+        $query = Article::find()->where(['category_id'=>$id]);
+
+// get the total number of articles (but do not fetch the article data yet)
+        $count = $query->count();
+
+// create a pagination object with the total count
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
+
+// limit the query using the pagination and retrieve the articles
+        $articles = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('category', [
+            'articles' => $articles,
+            'pagination' => $pagination]);
     }
 }
