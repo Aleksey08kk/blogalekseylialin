@@ -36,6 +36,6 @@ class PublicAsset extends AssetBundle
         "public/js/scripts.js",
     ];
     public $depends = [
-       
+
     ];
 }

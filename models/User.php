@@ -85,12 +85,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: Implement findIdentityByAccessToken() method.
     }
 
-    public static function findByEmail($email)
-    {
+    public static function findByEmail($email){
         return User::find()->where(['email'=>$email])->one();
     }
 
-
+    public function validatePassword($password)
+    {
+        return ($this->password == $password) ? true : false;
+    }
 
     public function create()
     {
@@ -117,17 +119,4 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->photo;
     }
-
-    public static function findByUsername($username){
-        return User::find()->where(['name'=>$username])->one();
-    }
-
-    public function validatePassword($password){
-        if($this->password == $password){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
 }
