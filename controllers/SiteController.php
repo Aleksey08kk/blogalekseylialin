@@ -12,6 +12,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\CommentForm;
 
 class SiteController extends Controller
 {
@@ -22,7 +23,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -33,7 +34,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -72,7 +73,7 @@ class SiteController extends Controller
             ->all();
 
         $popularArticles = Article::find()->orderBy('viewed desc')->limit(3)->all(); //сортировка по популярности статьи для вывода
-        $sortByDate = Article::find()->orderBy('date asc')->limit(4)->all(); //сортировка по дате
+        $sortByDate = Article::find()->orderBy('date asc')->limit(3)->all(); //сортировка по дате
         $categories = Category::find()->all(); //просто выводит все категории
 
         return $this->render('index', [
@@ -86,7 +87,15 @@ class SiteController extends Controller
 
     public function actionView($id){
         $article = Article::findOne($id);
-        return$this->render('singlePost', ['article'=>$article,]);
+        $comments = $article->getArticleComments();
+        $commentForm = new CommentForm();
+        $article->viewedCounter();
+
+        return$this->render('singlePost', [
+            'article'=>$article,
+            'comments'=>$comments,
+            'commentForm'=>$commentForm,
+        ]);
     }
 
 
@@ -140,4 +149,17 @@ class SiteController extends Controller
             'articles' => $articles,
             'pagination' => $pagination]);
     }
+
+    public function actionComment($id){
+        $model = new CommentForm();
+        if(Yii::$app->request->isPost){
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id)){
+                Yii::$app->getSession()->setFlash('comment', 'Ваш комментарий пройдет модерацию и добавится!');
+                return $this->redirect(['site/view','id'=>$id]);
+            }
+        }
+    }
+
+
 }

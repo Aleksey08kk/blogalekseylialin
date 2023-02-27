@@ -15,6 +15,7 @@ use yii\web\AssetBundle;
  */
 class PublicAsset extends AssetBundle
 {
+    public static $theme = 'white';
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [

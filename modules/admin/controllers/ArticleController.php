@@ -2,6 +2,8 @@
 
 namespace app\modules\admin\controllers;
 
+use app\assets\DarkAsset;
+use app\assets\PublicAsset;
 use app\models\Article;
 use app\models\ArticleSearch;
 use app\models\Category;
@@ -135,50 +137,52 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionSetImage($id){
+    public function actionSetImage($id)
+    {
         $model = new ImageUpload;
 
         if (Yii::$app->request->isPost) {
             $article = $this->findModel($id);
             $file = UploadedFile::getInstance($model, 'image');
 
-            if($article->saveImage($model->uploadFile($file, $article->image)))
-            {
-                return $this->redirect(['view', 'id'=>$article->id]);
+            if ($article->saveImage($model->uploadFile($file, $article->image))) {
+                return $this->redirect(['view', 'id' => $article->id]);
             }
         }
-        return $this->render('image', ['model'=>$model]);
+        return $this->render('image', ['model' => $model]);
     }
 
-    public function actionSetCategory($id){
+    public function actionSetCategory($id)
+    {
         $article = $this->findModel($id);
         $selectedCategory = $article->category->id;
         $categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
 
-        if(Yii::$app->request->isPost){
+        if (Yii::$app->request->isPost) {
             $category = Yii::$app->request->post('category');
             $article->saveCategory($category);
-            if($article->saveCategory(($category))){
+            if ($article->saveCategory(($category))) {
                 return $this->redirect(['view', 'id' => $article->id]);
             }
         }
         return $this->render('category', ['article' => $article, 'selectedCategory' => $selectedCategory, 'categories' => $categories]);
     }
 
-    public function actionSetTags($id){
+    public function actionSetTags($id)
+    {
         $article = $this->findModel($id);
         $selectedTags = $article->getSelectedTags(); //
         $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
 
-        if(Yii::$app->request->isPost){
+        if (Yii::$app->request->isPost) {
             $tags = Yii::$app->request->post('tags');
             $article->saveTags($tags);
-            return $this->redirect(['view', 'id'=>$article->id]);
+            return $this->redirect(['view', 'id' => $article->id]);
         }
 
         return $this->render('tags', [
-            'selectedTags'=>$selectedTags,
-            'tags'=>$tags
+            'selectedTags' => $selectedTags,
+            'tags' => $tags
         ]);
     }
 

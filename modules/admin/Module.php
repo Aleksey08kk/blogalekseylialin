@@ -1,6 +1,8 @@
 <?php
 
 namespace app\modules\admin;
+use app\assets\DarkAsset;
+use app\assets\PublicAsset;
 use Yii;
 use yii\filters\AccessControl;
 
@@ -48,4 +50,6 @@ class Module extends \yii\base\Module
 
         // custom initialization code goes here
     }
+
+
 }

@@ -28,11 +28,9 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Блог Алексея Лялина',
         'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
+        'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -56,23 +54,10 @@ AppAsset::register($this);
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+    <p>Подвал</p>
 </footer>
 
 <?php $this->endBody() ?>
-<?php $this->registerJsFile('/ckeditor/ckeditor.js');?>
-<?php $this->registerJsFile('/ckfinder/ckfinder.js');?>
-<script>
-    $(document).ready(function(){
-        var editor = CKEDITOR.replaceAll();
-        CKFinder.setupCKEditor( editor );
-    })
-
-</script>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -43,7 +43,6 @@ Table of contents
 --------------------------------------*/
 body {
     font-family: 'Open Sans', sans-serif;
-    background: #F4F4F4;
 }
 
 span, p, input {
@@ -78,7 +77,6 @@ ul {
 header
 ---------------------*/
 .main-menu.navbar-default {
-    background-color: #fff;
     border-color: #e5e5e5;
     border-radius: 0;
 }
