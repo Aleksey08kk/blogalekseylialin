@@ -1,7 +1,6 @@
 <?php
 
 namespace app\modules\admin;
-use app\assets\DarkAsset;
 use app\assets\PublicAsset;
 use Yii;
 use yii\filters\AccessControl;
@@ -26,7 +25,7 @@ class Module extends \yii\base\Module
     {
         return [
             'access'    =>  [
-                'class' =>  AccessControl::className(),
+                'class' =>  AccessControl::class,
                 'denyCallback'  =>  function($rule, $action)
                 {
                     throw new \yii\web\NotFoundHttpException();

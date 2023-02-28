@@ -30,8 +30,7 @@ class Article extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
-    {
+    public static function tableName(){
         return 'article';
     }
 
@@ -42,10 +41,11 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title', 'description', 'content'], 'string'],
-            [['date'], 'date', 'format' => 'php:Y-m-d'],
-            [['date'], 'default', 'value' => date('y-m-d')],
+            [['title','description','content'], 'string'],
+            [['date'], 'date', 'format'=>'php:Y-m-d'],
+            [['date'], 'default', 'value' => date('Y-m-d')],
             [['title'], 'string', 'max' => 255],
+            [['category_id'], 'number']
         ];
     }
 
@@ -125,7 +125,6 @@ class Article extends \yii\db\ActiveRecord
     }
 
     public function getDate(){
-        //Yii::$app->formatter->locale = 'ru-RU';
         return Yii::$app->formatter->asDate($this->date);
     }
 
@@ -134,8 +133,7 @@ class Article extends \yii\db\ActiveRecord
         return $this->save(false);
     }
 
-    public function getComments()
-    {
+    public function getComments(){
         return $this->hasMany(Comment::class, ['article_id'=>'id']);
     }
 
@@ -143,13 +141,11 @@ class Article extends \yii\db\ActiveRecord
         return $this->getComments()->where(['status'=>1])->all();
     }
     
-    public function getAuthor()
-    {
+    public function getAuthor() {
         return $this->hasOne(User::class, ['id'=>'user_id']);
     }
     
-    public function viewedCounter()
-    {
+    public function viewedCounter(){
         $this->viewed += 1;
         return $this->save(false);
     }

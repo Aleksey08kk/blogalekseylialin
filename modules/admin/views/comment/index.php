@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comments';
+$this->title = 'Комментарии';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <table class="table">
             <thead>
             <tr>
-                <td>#</td>
-                <td>Author</td>
-                <td>Text</td>
-                <td>Action</td>
+                <td>Номер</td>
+                <td>Автор</td>
+                <td>Текст комментария</td>
+                <td>Разрешить/запретить/удалить</td>
             </tr>
             </thead>
 

@@ -22,6 +22,8 @@ class Tag extends \yii\db\ActiveRecord
         return 'tag';
     }
 
+
+
     /**
      * {@inheritdoc}
      */

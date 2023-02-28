@@ -9,17 +9,19 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+    background: #48268c;
 }
 
 .wrap > .container {
     padding: 70px 15px 20px;
+    background: #48268c;
 }
 
 .footer {
     height: 60px;
     border-top: 1px solid #ddd;
     padding-top: 20px;
-    background-color: #0c5460;
+    background: #48268c;
 }
 
 .jumbotron {
@@ -33,7 +35,7 @@ body {
 }
 
 .not-set {
-    color: #c55;
+    color: rgba(75, 0, 130, 0.7);
     font-style: italic;
 }
 
@@ -47,6 +49,7 @@ a.asc:after, a.desc:after {
     font-weight: normal;
     line-height: 1;
     padding-left: 5px;
+    background: #48268c;
 }
 
 a.asc:after {
@@ -84,8 +87,8 @@ a.desc:after {
 }
 
 .error-summary {
-    color: #a94442;
-    background: #fdf7f7;
+    color: rgba(75, 0, 130, 0.7);
+    background: #ff0000;
     border-left: 3px solid #eed3d7;
     padding: 10px 20px;
     margin: 0 0 15px 0;
@@ -95,6 +98,7 @@ a.desc:after {
 .nav li > form > button.logout {
     padding: 15px;
     border: none;
+    color: rgba(75, 0, 130, 0.7);
 }
 
 @media(max-width:767px) {

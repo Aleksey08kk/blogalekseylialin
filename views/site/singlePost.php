@@ -25,21 +25,10 @@ use yii\helpers\Url;
                         <div class="entry-content">
                             <?= $article->content?>
                         </div>
-                        <div class="decoration">
-                            <a href="#" class="btn btn-default">Decoration</a>
-                            <a href="#" class="btn btn-default">Decoration</a>
-                        </div>
 
                         <div class="social-share">
 							<span
                                 class="social-share-title pull-left text-capitalize">Автор: <?= $article->author->name?> <?= $article->getDate()?></span>
-                            <ul class="text-center pull-right">
-                                <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a class="s-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a class="s-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a class="s-instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
                         </div>
                     </div>
                 </article>
@@ -54,7 +43,6 @@ use yii\helpers\Url;
                     </div>
 
                     <div class="comment-text">
-                        <a href="#" class="replay btn pull-right"> Replay</a>
                         <h5><?= $comment->user->name;?></h5>
 
                         <p class="comment-date">
