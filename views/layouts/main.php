@@ -28,7 +28,7 @@ DarkAsset::register($this);
     <?php $this->head() ?>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="dark-theme || light-theme">
 <?php $this->beginBody() ?>
 
 

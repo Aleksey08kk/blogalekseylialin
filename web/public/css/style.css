@@ -44,7 +44,9 @@ Table of contents
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 100px 0 0 0;
+    background-image: url('https://klike.net/uploads/posts/2022-10/1665494171_2-5.jpg');
 }
+
 
 span, p, input {
     font-family: 'Merriweather', serif;

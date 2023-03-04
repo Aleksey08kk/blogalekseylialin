@@ -2,27 +2,22 @@ html,
 body {
     height: 100%;
 }
-.dark-mode{
-    background-image: url('https://static.wixstatic.com/media/6adf48_6bc4b13da726408d9996312718cd1688~mv2.gif');
-}
+
 .wrap {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
-    background: #48268c;
 }
 
 .wrap > .container {
     padding: 70px 15px 20px;
-    background: #48268c;
 }
 
 .footer {
     height: 60px;
     border-top: 1px solid #ddd;
     padding-top: 20px;
-    background: #48268c;
 }
 
 .jumbotron {

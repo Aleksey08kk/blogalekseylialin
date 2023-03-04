@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
     </div>
-    <?= Html::submitButton('Login', ['class' => 'buttonAuthorization', 'name' => 'login-button']) ?>
+    <?= Html::submitButton('Войти', ['class' => 'buttonAuthorization', 'name' => 'login-button']) ?>
 
     <?php ActiveForm::end(); ?>
 
