@@ -1,6 +1,8 @@
 <?php
 /** @var yii\web\View $this */
+
 /** @var string $content */
+
 use app\assets\AppAsset;
 use app\assets\DarkAsset;
 use app\assets\PublicAsset;
@@ -10,7 +12,8 @@ use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
-PublicAsset::register($this);
+
+DarkAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>
@@ -28,37 +31,37 @@ PublicAsset::register($this);
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<nav class="navbar main-menu navbar-default">
-    <div class="container">
-        <div class="menu-content">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/"><img src="/public/images/logotip.jpg" alt=""></a>
-            </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav text-uppercase">
-                    <li>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/dark">Темная тема</a>
-                    </li>
-                </ul>
+<nav class="headernav">
+    <div class="headerconteiner">
 
-                <div class="i_con">
-                    <ul class="nav navbar-nav text-uppercase">
-                        <?php if(Yii::$app->user->isGuest):?>
-                            <li><a href="<?= Url::toRoute(['auth/login'])?>">Login</a></li>
-                            <li><a href="<?= Url::toRoute(['auth/signup'])?>">Register</a></li>
-                        <?php else: ?>
-                            <?= Html::beginForm(['/auth/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->name . ')', ['class' => 'btn btn-link logout', 'style'=>"padding-top:10px;"]). Html::endForm() ?>
-                            <a href="/admin">Админские дела</a>
-                        <?php endif;?>
-                    </ul>
-                </div>
-            </div>
-            <!-- /.navbar-collapse -->
+        <a class="link" href="/">Блог Алексея Лялина</a>
+
+        <div class="headermenu" id="bs-example-navbar-collapse-1">
+            <ul class="headerlist">
+                <li class="item">
+                    <a data-toggle="dropdown" class="linkmain" href="/">Главная</a>
+                </li>
+
+                <?php if (Yii::$app->user->isGuest): ?>
+                    <li class="item">
+                        <a class="link" href="<?= Url::toRoute(['auth/login']) ?>">Войти</a>
+                    </li>
+                    <li class="item">
+                        <a class="link" href="<?= Url::toRoute(['auth/signup']) ?>">Регистрация</a>
+                    </li>
+                <?php else: ?>
+                    <li class="item3admins">
+                        <a class="link" href="/admin">Админские дела</a>
+                    </li>
+                    <?= Html::beginForm(['/auth/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->name . ')', ['class' => 'btnlogout']) . Html::endForm() ?>
+                <?php endif; ?>
+                <li class="item">
+                    <button class="btn">Оформление</button>
+                </li>
+            </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>
@@ -66,10 +69,11 @@ PublicAsset::register($this);
 <?= $content ?>
 
 <footer class="footer-widget-section">
-    Блог
+
 </footer>
 
 <?php $this->endBody() ?>
-</>
+</
+>
 </html>
 <?php $this->endPage() ?>

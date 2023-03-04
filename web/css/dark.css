@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.dark-mode{
+    background-image: url('https://static.wixstatic.com/media/6adf48_6bc4b13da726408d9996312718cd1688~mv2.gif');
+}
+
+.labelPlaneta {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: indigo;
+    margin: -50px auto 10px auto;
+}
+
+.labelAuthorization {
+    color: #7f05d9;
+    margin: 10px auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    background-color: rgba(240, 248, 255, 0.13);
+    border-radius: 30px;
+    margin: 200px auto;
+}
+.formDakrTheme{
+    background-color: rgba(33, 34, 34, 0.685);
+}
+
+.input {
+    margin: 10px auto;
+    padding: 10px;
+    border: unset;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+    opacity: 0.5;
+    background-color: indigo;
+    width: 300px;
+    color: white;
+}
+
+.input:hover {
+    opacity: 1.0;
+}
+
+.input::placeholder {
+    color: white;
+}
+
+.input:focus {
+    color: white;
+}
+
+.buttonAuthorization {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    position: relative;
+    padding: 15px 30px;
+    border: 1px solid;
+    border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    border-image-slice: 1;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: 2px;
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+    width: 300px;
+    margin: 30px 0 50px 50px;
+    flex-direction: column;
+    background-color: rgba(75, 0, 130, 0.7);
+}
+
+.buttonAuthorization:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 100%;
+    z-index: -1;
+    color: white;
+    background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+    transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+
+.buttonAuthorization:hover {
+    background: rgba(255, 255, 255, 0);
+}
+
+.buttonAuthorization:hover:before {
+    bottom: 0%;
+    top: auto;
+    height: 100%;
+}
+/*---------------------------------------шапка-----------------------------------------------------*/
+a{
+    text-decoration: none;
+}
+.headernav {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 80;
+    background-color: #444444;
+    border-bottom: 1px solid rgb(139, 138, 138);
+    box-shadow: 0 0 10px 5px rgb(204, 203, 203);
+
+}
+.headerconteiner {
+    display: flex;
+    min-height: 70px;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0px auto;
+    box-sizing: content-box;
+}
+.headermenu {
+    margin: 0 0 0 133px;
+}
+.headerlist {
+    display: flex;
+    flex:0 1 50%;
+    flex-wrap: wrap;
+    padding: 5px 0;
+    list-style-type: none;
+}
+.item:not(:last-child){
+    margin: 0 10px 0 0;
+}
+
+.link{
+    color: rgb(206, 203, 203);
+    font-weight: 600;
+    line-height: 171%;
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 0;
+}
+.link:hover{
+    color: rgb(161, 3, 135);
+    font-weight: bold;
+    line-height: 171%;
+}
+.linkmain{
+    margin: 10px 100px 0 0;
+    color: rgb(206, 203, 203);
+    font-weight: 600;
+    line-height: 171%;
+    font-family: 'Montserrat', sans-serif;
+}
+.linkmain:hover{
+    color: rgb(161, 3, 135);
+    font-weight: bold;
+    line-height: 171%;
+}
+.btn {
+    display: inline-block;
+    color: rgb(77, 77, 77);
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .5em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+  } 
+  .btn:hover { background: rgba(255,255,255,.2); }
+  .btn:active { background: white; }
+
+.btnlogout{
+    display: inline-block;
+    color: rgb(77, 77, 77);
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    padding: .5em 2em;
+    outline: none;
+    border: 2px solid;
+    border-radius: 1px;
+    transition: 0.2s;
+    margin: 0 0 0 200px;
+}
+.btnlogout:hover { background: rgba(255,255,255,.2); }
+.btnlogout:active { background: white; }

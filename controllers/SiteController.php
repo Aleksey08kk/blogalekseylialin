@@ -4,9 +4,11 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\Tag;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -75,13 +77,16 @@ class SiteController extends Controller
         $popularArticles = Article::find()->orderBy('viewed desc')->limit(3)->all(); //сортировка по популярности статьи для вывода
         $sortByDate = Article::find()->orderBy('date asc')->limit(3)->all(); //сортировка по дате
         $categories = Category::find()->all(); //просто выводит все категории
+        $tags = Tag::find()->all();  //выводит массив тегов. в индексе записывает в переменную через форич
+
 
         return $this->render('index', [
             'articles' => $articles,
             'pagination' => $pagination,
             'popularArticles' => $popularArticles,
             'sortByDate' => $sortByDate,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags'=>$tags,
         ]);
     }
 
@@ -138,10 +143,26 @@ class SiteController extends Controller
             ->limit($pagination->limit)
             ->all();
 
+
         return $this->render('category', [
             'articles' => $articles,
             'pagination' => $pagination]);
     }
+
+    public function actionGetTags($id){
+        $query = Article::find()->where(['tag_id'=>$id]);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
+        $alltags = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('tags', [
+            '$alltags' => $alltags,
+            'pagination' => $pagination,
+        ]);}
+        
+        
 
     public function actionComment($id){
         $model = new CommentForm();

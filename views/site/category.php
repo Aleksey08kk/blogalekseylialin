@@ -1,8 +1,11 @@
 <?php
+
+use app\assets\PublicAsset;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
-
+PublicAsset::register($this);
 ?>
+<p>.<br>.</p>
 <!--main content start-->
 <div class="main-content">
     <div class="container">
