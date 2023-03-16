@@ -67,4 +67,7 @@ class ArticleTag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tag::class, ['id' => 'tag_id']);
     }
+
+
+
 }

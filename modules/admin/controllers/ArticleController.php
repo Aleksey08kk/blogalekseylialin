@@ -171,7 +171,7 @@ class ArticleController extends Controller
     public function actionSetTags($id)
     {
         $article = $this->findModel($id);
-        $selectedTags = $article->getSelectedTags(); //
+        $selectedTags = $article->getSelectedTags(); 
         $tags = ArrayHelper::map(Tag::find()->all(), 'id', 'title');
 
         if (Yii::$app->request->isPost) {
@@ -185,5 +185,6 @@ class ArticleController extends Controller
             'tags' => $tags
         ]);
     }
+
 
 }

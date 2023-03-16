@@ -35,6 +35,10 @@ body {
     color: rgb(206, 203, 203);
     background-color: #000000a4;
 }
+.dark-mode .row{
+    margin-right: -15px;
+    margin-left: -15px;
+}
 .dark-mode .widget{
     color: rgb(206, 203, 203);
     background-color: #000000a4;

@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string|null $title
  *
- * @property ArticleTag[] $articleTags
+ * @property Article[] $articles
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -44,9 +44,9 @@ class Tag extends \yii\db\ActiveRecord
             'title' => 'Title',
         ];
     }
-
+    
     /**
-     * Gets query for [[ArticleTags]].
+     * Gets query for [[Article]].
      *
      * @return \yii\db\ActiveQuery
      */
@@ -55,4 +55,13 @@ class Tag extends \yii\db\ActiveRecord
         return $this->hasMany(Article::class, ['id' => 'article_id'])
             ->viaTable('article_tag', ['tag_id' => 'id']);
     }
+    
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+            ->viaTable('article_tag', ['article_id' => 'id']);
+    }
+
+
+    
 }

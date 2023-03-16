@@ -57,6 +57,7 @@ PublicAsset::register($this);
                     </article>
                 <?php endforeach; ?>
 
+
                 <!------------виджет пагинации------------------>
                 <?php
                 echo LinkPager::widget([
@@ -132,10 +133,9 @@ PublicAsset::register($this);
                         <ul>
                             <?php foreach ($tags as $tag): ?>
                                 <li>
-                                    <a href="<?= Url::toRoute(['site/tags', 'id' => $tag->id]); ?>"><?= $tag->title ?></a>
+                                    <a href="<?= Url::toRoute(['site/tag', 'id' => $tag->id]); ?>"><?= $tag->title ?></a>
                                 </li>
                             <?php endforeach; ?>
-
                         </ul>
                     </aside>
 

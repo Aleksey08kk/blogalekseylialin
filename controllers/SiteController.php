@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\ArticleTag;
 use app\models\Category;
 use app\models\Tag;
 use Yii;
@@ -77,9 +78,9 @@ class SiteController extends Controller
         $popularArticles = Article::find()->orderBy('viewed desc')->limit(3)->all(); //сортировка по популярности статьи для вывода
         $sortByDate = Article::find()->orderBy('date asc')->limit(3)->all(); //сортировка по дате
         $categories = Category::find()->all(); //просто выводит все категории
-        $tags = Tag::find()->all();  //выводит массив тегов. в индексе записывает в переменную через форич
-
-
+        $tags = Tag::find()->all();  //выводит теги
+        
+        
         return $this->render('index', [
             'articles' => $articles,
             'pagination' => $pagination,
@@ -95,40 +96,29 @@ class SiteController extends Controller
         $comments = $article->getArticleComments();
         $commentForm = new CommentForm();
         $article->viewedCounter();
+        $tags = Tag::find()->all();
+        
 
         return$this->render('singlePost', [
             'article'=>$article,
             'comments'=>$comments,
             'commentForm'=>$commentForm,
+            'tags'=>$tags,
+            
         ]);
     }
 
+    public function actionTag($id){
+        $query = Article::find()->leftJoin('article_tag', 'article_tag.article_id=article.id')->where(['article_tag.tag_id'=>$id]);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
+        $articles = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout(){
-        return $this->render('about');
+        return $this->render('tag', [
+            'articles' => $articles,
+            'pagination' => $pagination]);
     }
 
     public function actionSinglePost(){
@@ -143,26 +133,12 @@ class SiteController extends Controller
             ->limit($pagination->limit)
             ->all();
 
-
         return $this->render('category', [
             'articles' => $articles,
             'pagination' => $pagination]);
     }
+    
 
-    public function actionGetTags($id){
-        $query = Article::find()->where(['tag_id'=>$id]);
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
-        $alltags = $query->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
-        return $this->render('tags', [
-            '$alltags' => $alltags,
-            'pagination' => $pagination,
-        ]);}
-        
-        
 
     public function actionComment($id){
         $model = new CommentForm();
@@ -174,6 +150,8 @@ class SiteController extends Controller
             }
         }
     }
+
+
 
 
 }
