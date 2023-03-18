@@ -66,10 +66,11 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $query = Article::find();
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>3]);
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 3]);
 
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
@@ -79,39 +80,41 @@ class SiteController extends Controller
         $sortByDate = Article::find()->orderBy('date asc')->limit(3)->all(); //сортировка по дате
         $categories = Category::find()->all(); //просто выводит все категории
         $tags = Tag::find()->all();  //выводит теги
-        
-        
+
+
         return $this->render('index', [
             'articles' => $articles,
             'pagination' => $pagination,
             'popularArticles' => $popularArticles,
             'sortByDate' => $sortByDate,
             'categories' => $categories,
-            'tags'=>$tags,
+            'tags' => $tags,
         ]);
     }
 
-    public function actionView($id){
+    public function actionView(int $id)
+    {
         $article = Article::findOne($id);
         $comments = $article->getArticleComments();
         $commentForm = new CommentForm();
         $article->viewedCounter();
         $tags = Tag::find()->all();
-        
 
-        return$this->render('singlePost', [
-            'article'=>$article,
-            'comments'=>$comments,
-            'commentForm'=>$commentForm,
-            'tags'=>$tags,
-            
+
+        return $this->render('singlePost', [
+            'article' => $article,
+            'comments' => $comments,
+            'commentForm' => $commentForm,
+            'tags' => $tags,
+
         ]);
     }
 
-    public function actionTag($id){
-        $query = Article::find()->leftJoin('article_tag', 'article_tag.article_id=article.id')->where(['article_tag.tag_id'=>$id]);
+    public function actionTag(int $id)
+    {
+        $query = Article::find()->leftJoin('article_tag', 'article_tag.article_id=article.id')->where(['article_tag.tag_id' => $id]);
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 5]);
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -121,14 +124,16 @@ class SiteController extends Controller
             'pagination' => $pagination]);
     }
 
-    public function actionSinglePost(){
+    public function actionSinglePost()
+    {
         return $this->render('singlePost');
     }
 
-    public function actionCategory($id){
-        $query = Article::find()->where(['category_id'=>$id]);
+    public function actionCategory(int $id)
+    {
+        $query = Article::find()->where(['category_id' => $id]);
         $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>5]);
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 5]);
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
@@ -137,21 +142,19 @@ class SiteController extends Controller
             'articles' => $articles,
             'pagination' => $pagination]);
     }
-    
 
 
-    public function actionComment($id){
+    public function actionComment(int $id)
+    {
         $model = new CommentForm();
-        if(Yii::$app->request->isPost){
+        if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
-            if($model->saveComment($id)){
+            if ($model->saveComment($id)) {
                 Yii::$app->getSession()->setFlash('comment', 'Ваш комментарий пройдет модерацию и добавится!');
-                return $this->redirect(['site/view','id'=>$id]);
+                return $this->redirect(['site/view', 'id' => $id]);
             }
         }
     }
-
-
 
 
 }

@@ -14,7 +14,7 @@ class CommentController extends Controller
         return $this->render('index',['comments'=>$comments]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $comment = Comment::findOne($id);
         if($comment->delete())
@@ -23,7 +23,7 @@ class CommentController extends Controller
         }
     }
 
-    public function actionAllow($id)
+    public function actionAllow(int $id)
     {
         $comment = Comment::findOne($id);
         if($comment->allow())
@@ -32,7 +32,7 @@ class CommentController extends Controller
         }
     }
 
-    public function actionDisallow($id)
+    public function actionDisallow(int $id)
     {
         $comment = Comment::findOne($id);
         if($comment->disallow())

@@ -61,7 +61,7 @@ class ArticleController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -93,7 +93,7 @@ class ArticleController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
 
@@ -113,7 +113,7 @@ class ArticleController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
 
@@ -127,7 +127,7 @@ class ArticleController extends Controller
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Article::findOne(['id' => $id])) !== null) {
             return $model;
@@ -137,7 +137,7 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionSetImage($id)
+    public function actionSetImage(int $id)
     {
         $model = new ImageUpload;
 
@@ -152,7 +152,7 @@ class ArticleController extends Controller
         return $this->render('image', ['model' => $model]);
     }
 
-    public function actionSetCategory($id)
+    public function actionSetCategory(int $id)
     {
         $article = $this->findModel($id);
         $selectedCategory = $article->category->id;
@@ -168,7 +168,7 @@ class ArticleController extends Controller
         return $this->render('category', ['article' => $article, 'selectedCategory' => $selectedCategory, 'categories' => $categories]);
     }
 
-    public function actionSetTags($id)
+    public function actionSetTags(int $id)
     {
         $article = $this->findModel($id);
         $selectedTags = $article->getSelectedTags(); 

@@ -85,11 +85,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: Implement findIdentityByAccessToken() method.
     }
 
-    public static function findByEmail($email){
+    public static function findByEmail(String $email){
         return User::find()->where(['email'=>$email])->one();
     }
 
-    public function validatePassword($password)
+    public function validatePassword(String $password)
     {
         return ($this->password == $password) ? true : false;
     }
@@ -97,22 +97,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function create()
     {
         return $this->save(false);
-    }
-
-    public function saveFromVk($uid, $name, $photo)
-    {
-        $user = User::findOne($uid);
-        if($user)
-        {
-            return Yii::$app->user->login($user);
-        }
-
-        $this->id = $uid;
-        $this->name = $name;
-        $this->photo = $photo;
-        $this->create();
-
-        return Yii::$app->user->login($this);
     }
 
 }
