@@ -12,8 +12,6 @@ class m230214_052332_create_comment_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('comment','date', $this->date());
-
         $this->createTable('{{%comment}}', [
             'id' => $this->primaryKey(),
             'text'=>$this->string(),
