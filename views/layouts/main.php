@@ -52,7 +52,7 @@ DarkAsset::register($this);
                     </li>
                 <?php else: ?>
                     <li class="item3admins">
-                        <a class="link" href="/admin">Админские дела</a>
+                        <a class="link" href="<?= Url::toRoute(['/admin']) ?>">Админские дела</a>
                     </li>
                     <?= Html::beginForm(['/auth/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->name . ')', ['class' => 'btnlogout']) . Html::endForm() ?>
                 <?php endif; ?>

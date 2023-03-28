@@ -61,6 +61,9 @@ class m230214_052402_create_article_tag_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk-tag_id', 'article_tag');
+        $this->dropForeignKey('tag_article_article_id', 'article_tag');
+
         $this->dropTable('{{%article_tag}}');
     }
 }

@@ -22,7 +22,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'user';
     }
@@ -30,7 +30,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['isAdmin'], 'integer'],
@@ -41,7 +41,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -56,16 +56,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getComments()
+    public function getComments(): \yii\db\ActiveQuery
     {
-        return $this->hasMany(Comment::className(), ['user_id' => 'id']);
+        return $this->hasMany(Comment::class(), ['user_id' => 'id']);
     }
 
-    public static function findIdentity($id)
+    public static function findIdentity($id): User
     {
         return User::findOne($id);
     }
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -85,16 +85,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: Implement findIdentityByAccessToken() method.
     }
 
-    public static function findByEmail(String $email){
+    public static function findByEmail(String $email): \yii\db\ActiveRecord
+    {
         return User::find()->where(['email'=>$email])->one();
     }
 
-    public function validatePassword(String $password)
+    public function validatePassword(String $password): bool
     {
-        return ($this->password == $password) ? true : false;
+        return $this->password == $password;
     }
 
-    public function create()
+    public function create(): bool
     {
         return $this->save(false);
     }

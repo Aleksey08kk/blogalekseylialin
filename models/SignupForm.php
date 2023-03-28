@@ -10,7 +10,8 @@ class SignupForm extends Model
     public $email;
     public $password;
 
-    public function rules(){
+    public function rules(): array
+    {
         return [
             [['name','email','password'], 'required'],
             [['name'], 'string'],

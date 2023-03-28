@@ -12,7 +12,7 @@ class m230227_074628_add_date_to_comment extends Migration
      */
     public function safeUp()
     {
-
+        $this->addColumn('comment','date', $this->date());
     }
 
     /**

@@ -9,7 +9,7 @@ class CommentForm extends Model
 {
     public $comment;
     
-    public function rules()
+    public function rules(): array
     {
         return [
             [['comment'], 'required'],
@@ -17,7 +17,8 @@ class CommentForm extends Model
         ];
     }
 
-    public function saveComment($article_id){
+    public function saveComment($article_id): bool
+    {
         $comment = new Comment;
         $comment->text = $this->comment;
         $comment->user_id = Yii::$app->user->id;
@@ -26,5 +27,4 @@ class CommentForm extends Model
         $comment->date = date('Y-m-d');
         return $comment->save();
     }
-
 }

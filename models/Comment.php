@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "comment".
@@ -20,14 +21,16 @@ class Comment extends \yii\db\ActiveRecord{
     /**
      * {@inheritdoc}
      */
-    public static function tableName(){
+    public static function tableName(): string
+    {
         return 'comment';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules(){
+    public function rules(): array
+    {
         return [
             [['user_id', 'article_id', 'status'], 'integer'],
             [['text'], 'string', 'max' => 255],
@@ -39,7 +42,8 @@ class Comment extends \yii\db\ActiveRecord{
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels(){
+    public function attributeLabels(): array
+    {
         return [
             'id' => 'ID',
             'text' => 'Text',
@@ -52,34 +56,40 @@ class Comment extends \yii\db\ActiveRecord{
     /**
      * Gets query for [[Article]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getArticle() {
+    public function getArticle(): ActiveQuery
+    {
         return $this->hasOne(Article::class, ['id' => 'article_id']);
     }
 
     /**
      * Gets query for [[User]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUser(){
+    public function getUser(): ActiveQuery
+    {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
-    public function getDate(){
+    public function getDate(): string
+    {
         return Yii::$app->formatter->asDate($this->date);
     }
 
-    public function isAllowed(){
+    public function isAllowed(): int
+    {
         return $this->status;
     }
 
-    public function allow(){
+    public function allow(): bool
+    {
         $this->status = 1;
         return $this->save(false);
     }
-    public function disallow(){
+    public function disallow(): bool
+    {
         $this->status = 0;
         return $this->save(false);
     }

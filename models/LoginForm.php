@@ -23,7 +23,8 @@ class LoginForm extends Model
     /**
      * @return array the validation rules.
      */
-    public function rules(){
+    public function rules(): array
+    {
         return [
             [['email', 'password'], 'required'],
             ['rememberMe', 'boolean'],
@@ -53,7 +54,7 @@ class LoginForm extends Model
      * Logs in a user using the provided email and password.
      * @return bool whether the user is logged in successfully
      */
-    public function login()
+    public function login(): bool
     {
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
@@ -64,9 +65,9 @@ class LoginForm extends Model
     /**
      * Finds user by [[email]]
      *
-     * @return User|null
+     * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         if ($this->_user === false) {
             $this->_user = User::findByEmail($this->email);

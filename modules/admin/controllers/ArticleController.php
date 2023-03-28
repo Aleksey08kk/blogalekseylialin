@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 /**
@@ -71,7 +72,7 @@ class ArticleController extends Controller
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -90,7 +91,7 @@ class ArticleController extends Controller
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate(int $id)
@@ -110,7 +111,7 @@ class ArticleController extends Controller
      * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete(int $id)
@@ -139,7 +140,7 @@ class ArticleController extends Controller
 
     public function actionSetImage(int $id)
     {
-        $model = new ImageUpload;
+        $model = new ImageUpLoad;
 
         if (Yii::$app->request->isPost) {
             $article = $this->findModel($id);
@@ -185,6 +186,4 @@ class ArticleController extends Controller
             'tags' => $tags
         ]);
     }
-
-
 }

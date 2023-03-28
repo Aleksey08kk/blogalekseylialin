@@ -14,7 +14,6 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\CommentForm;
 
 class SiteController extends Controller
@@ -22,7 +21,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
@@ -48,7 +47,7 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -66,7 +65,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $query = Article::find();
         $count = $query->count();
@@ -92,7 +91,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionView(int $id)
+    public function actionView(int $id): string
     {
         $article = Article::findOne($id);
         $comments = $article->getArticleComments();
@@ -110,7 +109,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionTag(int $id)
+    public function actionTag(int $id): string
     {
         $query = Article::find()->leftJoin('article_tag', 'article_tag.article_id=article.id')->where(['article_tag.tag_id' => $id]);
         $count = $query->count();
@@ -124,12 +123,12 @@ class SiteController extends Controller
             'pagination' => $pagination]);
     }
 
-    public function actionSinglePost()
+    public function actionSinglePost(): string
     {
         return $this->render('singlePost');
     }
 
-    public function actionCategory(int $id)
+    public function actionCategory(int $id): string
     {
         $query = Article::find()->where(['category_id' => $id]);
         $count = $query->count();
@@ -155,6 +154,4 @@ class SiteController extends Controller
             }
         }
     }
-
-
 }
